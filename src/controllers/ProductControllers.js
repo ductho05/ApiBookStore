@@ -147,6 +147,7 @@ class ProductControllers {
     try {
       var num = parseInt(req.params.num) || 8;
       const data = await Product.find()
+        .populate("category")
         .sort({
           published_date: -1,
         })
