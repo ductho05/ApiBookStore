@@ -49,6 +49,32 @@ class CategoryControllers {
       res.json(resObj);
     }
   }
+
+  // Lấy 8 sản phẩm thuộc danh mục 
+  async getProductByCategory(req, res) {
+    try {
+      const data = await Category.findById(req.params.id).populate("product");
+      if (data) {
+        console.log(data);
+        resObj.status = "OK";
+        resObj.message = "Found category successfully";
+        resObj.data = data.product;
+        res.json(resObj);
+      } else {
+        resObj.status = "Failed";
+        resObj.message = "Not found data";
+        resObj.data = "";
+        res.json(resObj);
+      }
+    } catch (err) {
+      resObj.status = "Failed";
+      resObj.message = "Error when get data";
+      resObj.data = "";
+      res.json(resObj);
+    }
+  }
+  
+
 }
 
 module.exports = new CategoryControllers();

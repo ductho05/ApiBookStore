@@ -179,6 +179,7 @@ class ProductControllers {
         .sort({
           price: 1,
         })
+        .populate("category")
         .limit(num);
       if (data) {
         resObj.status = "OK";
@@ -204,10 +205,13 @@ class ProductControllers {
     try {
       var num = parseInt(req.params.num) || 8;
       const data = await Product.find()
+        .populate("category")
+
         .sort({
           sold: -1,
         })
-        .limit(num);
+        .limit(num)
+        .exec(); // Thực thi
       if (data) {
         resObj.status = "OK";
         resObj.message = "Get product successfully";
@@ -258,11 +262,10 @@ class ProductControllers {
   // Lấy sách theo danh mục
   async getProductByCategory(req, res) {
     try {
-      var category = req.params.category;
-      const data = await Product.find({
-        category: category,
-      });
+      var id = req.params.id;
+      const data = await Product.find({ category: id }).populate("category");
       if (data) {
+        console.log(data);
         resObj.status = "OK";
         resObj.message = "Get product successfully";
         resObj.data = data;
@@ -280,6 +283,7 @@ class ProductControllers {
       return res.json(resObj);
     }
   }
+
 
   // Thêm dữ liệu sách
   async addProduct(req, res) {
