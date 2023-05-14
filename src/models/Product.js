@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+
 const Product = new Schema(
   {
     title: { type: String, require: true }, // Tên sách
@@ -22,5 +23,6 @@ const Product = new Schema(
     body: String,
   }
 );
+
 
 module.exports = mongoose.model("Product", Product);
