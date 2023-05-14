@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const Category = new Schema({
+  _id: { type: mongoose.Schema.Types.String, require: true },
   name: { type: String, require: true }, // Tên danh mục  
-  status: { type: String, require: true, default: "Hoạt dộng" }, // Trạng thái
-  // product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" , require: true},
+  status: { type: String, require: true, default: "Hoạt động" }, // Trạng thái
 });
 const categorymodel = mongoose.model("Category", Category);
 // categorymodel.create(
